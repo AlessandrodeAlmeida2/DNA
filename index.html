@@ -129,6 +129,42 @@
             opacity: 1;
         }
 
+        .navbar {
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--card-border);
+            border-radius: 15px;
+            padding: 15px 30px;
+            margin-bottom: 20px;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .nav-link {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-link:hover {
+            color: #60a5fa;
+        }
+
+        .nav-link i {
+            font-size: 0.9rem;
+        }
+
         footer {
             margin-top: 80px;
             font-size: 0.85rem;
@@ -155,6 +191,23 @@
 <body>
 
 <div class="container">
+    <nav class="navbar">
+        <div class="nav-links">
+            <a href="https://github.com/AlessandrodeAlmeida2/DNA/blob/main/dna.html" class="nav-link">
+                <i class="fas fa-chart-pie"></i>
+                Painel Resumo
+            </a>
+            <a href="https://github.com/AlessandrodeAlmeida2/DNA/blob/main/relatorio_visual_completo.html" class="nav-link">
+                <i class="fas fa-network-wired"></i>
+                Relatório Completo
+            </a>
+            <a href="https://genealogy-hnevcntg.manus.space/#acao" class="nav-link" target="_blank">
+                <i class="fas fa-dna"></i>
+                Genealogy Detalhada
+            </a>
+        </div>
+    </nav>
+
     <header>
         <h1>Portal Genético</h1>
         <p class="subtitle">Análise avançada de herança cromossômica e mapeamento de primos para Valter Alessandro Agostini.</p>
@@ -171,6 +224,12 @@
             <i class="fas fa-network-wired card-icon"></i>
             <h2>Relatório Completo</h2>
             <p>Análise detalhada com tabelas de todos os primos, segmentos exatos e ferramenta de descoberta de matches.</p>
+        </a>
+
+        <a href="https://genealogy-hnevcntg.manus.space/#acao" class="menu-card" target="_blank">
+            <i class="fas fa-dna card-icon"></i>
+            <h2>Genealogy Detalhada</h2>
+            <p>Acesso à plataforma completa com análises avançadas e ferramentas de descoberta genealógica.</p>
         </a>
     </div>
 
