@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Genético Completo - Valter Agostini</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --card-border: rgba(148, 163, 184, 0.1);
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --accent-agostini: #0ea5e9; /* Sky Blue */
+            --accent-pasquini: #10b981; /* Emerald */
+            --accent-albuquerque: #f59e0b; /* Amber */
+            --accent-gallois: #d946ef; /* Fuchsia */
+            --gradient-bg: radial-gradient(circle at 50% 0%, #1e293b 0%, #0f172a 100%);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-color);
+            background-image: var(--gradient-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-color);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #475569;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* HEADER */
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(to right, #60a5fa, #c084fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            letter-spacing: 0.5px;
+        }
+
+        /* CARDS GRID */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 25px;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        /* Top colored border strips */
+        .card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+        }
+
+        .card.blue::after { background: var(--accent-agostini); }
+        .card.green::after { background: var(--accent-pasquini); }
+        .card.yellow::after { background: var(--accent-albuquerque); }
+        .card.purple::after { background: var(--accent-gallois); }
+
+        .card h3 { 
+            margin-top: 0; 
+            margin-bottom: 15px;
+            display: flex; 
+            align-items: center; 
+            gap: 12px;
+            color: var(--text-primary);
+            font-size: 1.25rem;
+        }
+        
+        /* Icon Colors */
+        .card.blue i { color: var(--accent-agostini); }
+        .card.green i { color: var(--accent-pasquini); }
+        .card.yellow i { color: var(--accent-albuquerque); }
+        .card.purple i { color: var(--accent-gallois); }
+
+        .card p strong {
+            color: var(--text-secondary);
+            display: block;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .card ul { 
+            padding-left: 20px; 
+            font-size: 0.95em; 
+            color: #cbd5e1;
+        }
+        
+        .card li { margin-bottom: 6px; }
+
+        /* CHARTS SECTION */
+        .charts-section {
+            display: grid;
+            grid-template-columns: 1fr;
+            margin-bottom: 50px;
+            gap: 40px; /* Space between the two charts */
+        }
+
+        .chart-box {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .chart-box h2 {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+
+        .chart-box p {
+            color: var(--text-secondary);
+            margin-bottom: 25px;
+        }
+
+        /* DATA TABLES */
+        .data-section {
+            background: var(--card-bg); 
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            padding: 30px;
+        }
+        
+        .data-section h2 {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 30px;
+            color: var(--text-primary);
+        }
+
+        .family-block {
+            margin-bottom: 40px;
+        }
+
+        .family-title {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--card-border);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin-top: 10px;
+        }
+
+        th {
+            background-color: rgba(15, 23, 42, 0.5);
+            padding: 15px;
+            text-align: left;
+            color: var(--text-secondary);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            border-bottom: 1px solid #334155;
+        }
+        
+        th:first-child { border-top-left-radius: 8px; }
+        th:last-child { border-top-right-radius: 8px; }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+            color: var(--text-primary);
+        }
+
+        tr:last-child td { border-bottom: none; }
+        
+        tr:hover td {
+            background-color: rgba(255, 255, 255, 0.03);
+        }
+
+        .segment-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.8em;
+            margin: 2px 4px 2px 0;
+            font-weight: 600;
+            vertical-align: middle;
+        }
+        
+        .bg-blue { 
+            background-color: rgba(14, 165, 233, 0.15); 
+            color: #38bdf8; 
+            border: 1px solid rgba(14, 165, 233, 0.3);
+        }
+        .bg-green { 
+            background-color: rgba(16, 185, 129, 0.15); 
+            color: #34d399; 
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+        .bg-yellow { 
+            background-color: rgba(245, 158, 11, 0.15); 
+            color: #fbbf24; 
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+        .bg-purple { 
+            background-color: rgba(217, 70, 239, 0.15); 
+            color: #e879f9; 
+            border: 1px solid rgba(217, 70, 239, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 20px 15px; }
+            header h1 { font-size: 1.8rem; }
+            td, th { padding: 12px 10px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1><i class="fas fa-dna"></i> Relatório Genético Visual</h1>
+        <div class="subtitle">Valter Alessandro Agostini - Análise Consolidada</div>
+    </header>
+
+    <!-- CARDS DE RESUMO -->
+    <div class="cards-grid">
+        <div class="card blue">
+            <h3><i class="fas fa-male"></i> Paterno - Avô (Romeu)</h3>
+            <p><strong>Agostini</strong></p>
+            <ul>
+                <li><strong>Origem:</strong> Trento / Vêneto (Itália)</li>
+                <li><strong>Chaves:</strong> Chr 3, 8, 18</li>
+                <li><strong>Primos:</strong> Matteo Baggio, Camila Lanzillo</li>
+            </ul>
+        </div>
+        <div class="card green">
+            <h3><i class="fas fa-female"></i> Paterno - Avó (Yolanda)</h3>
+            <p><strong>Pasquini</strong></p>
+            <ul>
+                <li><strong>Origem:</strong> Mista (Itália, Brasil, Alemanha)</li>
+                <li><strong>Chaves:</strong> Chr 5, 9, 13, 14, 15, 17, 19, 20</li>
+                <li><strong>Primos:</strong> Yan Della Torre, Guiomar Pinheiro</li>
+            </ul>
+        </div>
+        <div class="card yellow">
+            <h3><i class="fas fa-male"></i> Materno - Avô (Plínio)</h3>
+            <p><strong>D'Alvia</strong></p>
+            <ul>
+                <li><strong>Origem:</strong> Salgado D'Alvia</li>
+                <li><strong>Chaves:</strong> Chr 4 (Inteiro), 11, 16</li>
+                <li><strong>Primos:</strong> Marcos Toledo, Beatriz Rissato</li>
+            </ul>
+        </div>
+        <div class="card purple">
+            <h3><i class="fas fa-female"></i> Materno - Avó (Neuza)</h3>
+            <p><strong>Albuquerque / Almeida</strong></p>
+            <ul>
+                <li><strong>Origem:</strong> Albuquerque de Almeida</li>
+                <li><strong>Chaves:</strong> Chr 1, 2, 9, 10, 14, 17, 19</li>
+                <li><strong>Primos:</strong> Mélanie Petit, Celso Iglesias</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- GRÁFICO DE CROMOSSOMOS (ORIGINAL) -->
+    <div class="charts-section">
+        <div class="chart-box">
+            <h2><i class="fas fa-layer-group"></i> Visão Geral por Avô (Chromosome Painter)</h2>
+            <p>Mapeamento visual colorido por linha familiar (Paterno-Avô, etc). Passe o mouse para ver as coordenadas.</p>
+            <div style="height: 500px; position: relative;">
+                <canvas id="overviewChart"></canvas>
+            </div>
+        </div>
+        
+        <!-- NEW CHART: DETAILED BY COUSIN -->
+        <div class="chart-box">
+            <h2><i class="fas fa-user-check"></i> Detalhe de Matches por Primo</h2>
+            <p>Mapeamento detalhado onde cada barra representa um primo específico. Passe o mouse para ver <strong>quem</strong> compartilha o segmento.</p>
+            <div style="height: 1200px; position: relative;"> <!-- Taller to accommodate potentially more rows/detail -->
+                <canvas id="detailChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- TABELAS DETALHADAS -->
+    <div class="data-section">
+        <h2><i class="fas fa-list"></i> Detalhes dos Segmentos e Matches</h2>
+        
+        <div class="family-block">
+            <h3 class="family-title" style="color: var(--accent-agostini); border-color: rgba(14, 165, 233, 0.3);">
+                <i class="fas fa-circle"></i> 1. Lado Agostini (Avô Romeu)
+            </h3>
+            <table>
+                <thead><tr><th style="width: 30%">Primo</th><th>Segmentos</th></tr></thead>
+                <tbody>
+                    <tr><td>Matteo Baggio</td><td><span class="segment-badge bg-blue">Chr 3: 40-67M</span></td></tr>
+                    <tr><td>Camila Lanzillo</td><td><span class="segment-badge bg-blue">Chr 3: 59-72M</span> <span class="segment-badge bg-blue">Chr 8: 109-137M</span> <span class="segment-badge bg-blue">Chr 18: 42-47M</span></td></tr>
+                    <tr><td>Susi Mondo</td><td><span class="segment-badge bg-blue">Chr 3: 56-61M</span></td></tr>
+                    <tr><td>Miriam Valezi</td><td><span class="segment-badge bg-blue">Chr 8: 110-126M</span></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="family-block">
+            <h3 class="family-title" style="color: var(--accent-pasquini); border-color: rgba(16, 185, 129, 0.3);">
+                <i class="fas fa-circle"></i> 2. Lado Pasquini (Avó Yolanda)
+            </h3>
+            <table>
+                <thead><tr><th style="width: 30%">Primo</th><th>Segmentos</th></tr></thead>
+                <tbody>
+                    <tr><td>Yan Della Torre</td><td><span class="segment-badge bg-green">Chr 13: 91-112M</span> <span class="segment-badge bg-green">Chr 20: 17-31M</span></td></tr>
+                    <tr><td>Matteo Bianco</td><td><span class="segment-badge bg-green">Chr 13: 98-103M</span></td></tr>
+                    <tr><td>Guiomar Pinheiro</td><td><span class="segment-badge bg-green">Chr 9: 87-110M</span> <span class="segment-badge bg-green">Chr 13, 15, 19</span></td></tr>
+                    <tr><td>Eduardo Ruben</td><td><span class="segment-badge bg-green">Chr 15: 54-66M</span> <span class="segment-badge bg-green">Chr 19: 9-14M</span></td></tr>
+                    <tr><td>Maura Nascimento</td><td><span class="segment-badge bg-green">Chr 17: 33-53M</span></td></tr>
+                    <tr><td>Ro Schneider</td><td><span class="segment-badge bg-green">Chr 17: 30-48M</span></td></tr>
+                    <tr><td>Viviane Sbrana</td><td><span class="segment-badge bg-green">Chr 14: 53-71M</span></td></tr>
+                    <tr><td>Angela Becker (Alemã)</td><td><span class="segment-badge bg-green">Chr 5: 114-122M</span></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="family-block">
+            <h3 class="family-title" style="color: var(--accent-albuquerque); border-color: rgba(245, 158, 11, 0.3);">
+                <i class="fas fa-circle"></i> 3. Lado D'Alvia (Avô Plínio)
+            </h3>
+            <table>
+                <thead><tr><th style="width: 30%">Primo</th><th>Segmentos</th></tr></thead>
+                <tbody>
+                    <tr><td>Marcos Toledo</td><td><span class="segment-badge bg-yellow">Chr 4: 16-27M</span></td></tr>
+                    <tr><td>Beatriz Rissato</td><td><span class="segment-badge bg-yellow">Chr 4: 41-76M</span></td></tr>
+                    <tr><td>Morten Andersen (DK)</td><td><span class="segment-badge bg-yellow">Chr 4: 41-62M</span></td></tr>
+                    <tr><td>Moisés Dias</td><td><span class="segment-badge bg-yellow">Chr 11: 32-37M</span> <span class="segment-badge bg-yellow">Chr 16: 50-60M</span></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="family-block">
+            <h3 class="family-title" style="color: var(--accent-gallois); border-color: rgba(217, 70, 239, 0.3);">
+                <i class="fas fa-circle"></i> 4. Lado Albuquerque / Almeida (Avó Neuza)
+
+            </h3>
+            <table>
+                <thead><tr><th style="width: 30%">Primo</th><th>Segmentos</th></tr></thead>
+                <tbody>
+                    <tr><td>Mélanie Petit-juillard</td><td><span class="segment-badge bg-purple">Chr 1: 0-5M</span> <span class="segment-badge bg-purple">Chr 9: 135-137M</span> <span class="segment-badge bg-purple">Chr 19: 45-54M</span></td></tr>
+                    <tr><td>Celso Iglesias</td><td><span class="segment-badge bg-purple">Chr 1: 3-11M</span> <span class="segment-badge bg-purple">Chr 19: 43-47M</span></td></tr>
+                    <tr><td>Nando Lenior</td><td><span class="segment-badge bg-purple">Chr 1: 4-8M</span> <span class="segment-badge bg-purple">Chr 2: 84-100M</span></td></tr>
+                    <tr><td>João G. Rocha</td><td><span class="segment-badge bg-purple">Chr 2: 81-119M</span></td></tr>
+                    <tr><td>Ronaldo Lima</td><td><span class="segment-badge bg-purple">Chr 2: 18-31M</span> <span class="segment-badge bg-purple">Chr 17: 3-7M</span></td></tr>
+                    <tr><td>Natália Godoy</td><td><span class="segment-badge bg-purple">Chr 9: 9-13M</span></td></tr>
+                    <tr><td>Jean Claude Jacquet</td><td><span class="segment-badge bg-purple">Chr 14: 26-52M</span></td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    // --- DATA ---
+    const COLORS = {
+        agostini: '#0ea5e9',
+        pasquini: '#10b981',
+        albuquerque: '#f59e0b',
+        gallois: '#d946ef'
+    };
+
+    // Full structured data with names attached
+    // This allows us to map segment -> cousin name for the tooltip
+    const detailedSegments = [
+        // Agostini
+        {x: [40, 67], y: 'Chr 3', name: 'Matteo Baggio', group: 'agostini'},
+        {x: [59, 72], y: 'Chr 3', name: 'Camila Lanzillo', group: 'agostini'},
+        {x: [109, 137], y: 'Chr 8', name: 'Camila Lanzillo', group: 'agostini'},
+        {x: [42, 47], y: 'Chr 18', name: 'Camila Lanzillo', group: 'agostini'},
+        {x: [56, 61], y: 'Chr 3', name: 'Susi Mondo', group: 'agostini'},
+        {x: [110, 126], y: 'Chr 8', name: 'Miriam Valezi', group: 'agostini'},
+        
+        // Pasquini
+        {x: [91, 112], y: 'Chr 13', name: 'Yan Della Torre', group: 'pasquini'},
+        {x: [17, 31], y: 'Chr 20', name: 'Yan Della Torre', group: 'pasquini'},
+        {x: [98, 103], y: 'Chr 13', name: 'Matteo Bianco', group: 'pasquini'},
+        {x: [87, 110], y: 'Chr 9', name: 'Guiomar Pinheiro', group: 'pasquini'},
+        {x: [54, 66], y: 'Chr 15', name: 'Eduardo Ruben', group: 'pasquini'},
+        {x: [9, 14], y: 'Chr 19', name: 'Eduardo Ruben', group: 'pasquini'},
+        {x: [33, 53], y: 'Chr 17', name: 'Maura Nascimento', group: 'pasquini'},
+        {x: [30, 48], y: 'Chr 17', name: 'Ro Schneider', group: 'pasquini'},
+        {x: [53, 71], y: 'Chr 14', name: 'Viviane Sbrana', group: 'pasquini'},
+        {x: [114, 122], y: 'Chr 5', name: 'Angela Becker', group: 'pasquini'},
+
+        // Rizzato
+        {x: [16, 27], y: 'Chr 4', name: 'Marcos Toledo', group: 'albuquerque'},
+        {x: [41, 76], y: 'Chr 4', name: 'Beatriz Rissato', group: 'albuquerque'},
+        {x: [41, 62], y: 'Chr 4', name: 'Morten Andersen (DK)', group: 'albuquerque'},
+        {x: [32, 37], y: 'Chr 11', name: 'Moisés Dias', group: 'albuquerque'},
+        {x: [50, 60], y: 'Chr 16', name: 'Moisés Dias', group: 'albuquerque'},
+
+        // Gallois
+        {x: [0, 5], y: 'Chr 1', name: 'Mélanie Petit-juillard', group: 'gallois'},
+        {x: [135, 137], y: 'Chr 9', name: 'Mélanie Petit-juillard', group: 'gallois'},
+        {x: [45, 54], y: 'Chr 19', name: 'Mélanie Petit-juillard', group: 'gallois'},
+        {x: [3, 11], y: 'Chr 1', name: 'Celso Iglesias', group: 'gallois'},
+        {x: [43, 47], y: 'Chr 19', name: 'Celso Iglesias', group: 'gallois'},
+        {x: [4, 8], y: 'Chr 1', name: 'Nando Lenior', group: 'gallois'},
+        {x: [84, 100], y: 'Chr 2', name: 'Nando Lenior', group: 'gallois'},
+        {x: [81, 119], y: 'Chr 2', name: 'João G. Rocha', group: 'gallois'},
+        {x: [18, 31], y: 'Chr 2', name: 'Ronaldo Lima', group: 'gallois'},
+        {x: [3, 7], y: 'Chr 17', name: 'Ronaldo Lima', group: 'gallois'},
+        {x: [9, 13], y: 'Chr 9', name: 'Natália Godoy', group: 'gallois'},
+        {x: [26, 52], y: 'Chr 14', name: 'Jean Claude Jacquet', group: 'gallois'}
+    ];
+
+    const yLabels = Array.from({length: 22}, (_, i) => 'Chr ' + (i + 1));
+
+    // --- CHART 1: OVERVIEW (Aggregated) ---
+    // Similar to previous implementation
+    const ctxOverview = document.getElementById('overviewChart').getContext('2d');
+    
+    // Group datasets for overview
+    const overviewDatasets = [];
+    const groups = ['agostini', 'pasquini', 'albuquerque', 'gallois'];
+    const groupLabels = {
+        'agostini': 'Paterno-Avô (Romeu Agostini)',
+        'pasquini': 'Paterno-Avó (Yolanda Pasquini)',
+        'albuquerque': 'Materno-Avô (Plínio D\'Alvia)',
+        'gallois': 'Materno-Avó (Neuza Albuquerque/Almeida)'
+    };
+
+    groups.forEach(gKey => {
+        const groupData = detailedSegments.filter(d => d.group === gKey);
+        overviewDatasets.push({
+            label: groupLabels[gKey],
+            data: groupData,
+            backgroundColor: COLORS[gKey],
+            barPercentage: 0.6,
+            minBarLength: 3 // visual tweak
+        });
+    });
+
+    new Chart(ctxOverview, {
+        type: 'bar',
+        data: {
+            labels: yLabels,
+            datasets: overviewDatasets
+        },
+        options: {
+            indexAxis: 'y',
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                x: {
+                    min: 0, max: 250,
+                    title: { display: true, text: 'Posição (Mb)', color: '#94a3b8' },
+                    grid: { color: '#334155' },
+                    ticks: { color: '#94a3b8' }
+                },
+                y: {
+                    stacked: true, // Stacked to show total coverage
+                    grid: { color: '#334155' },
+                    ticks: { color: '#cbd5e1' }
+                }
+            },
+            plugins: {
+                legend: { position: 'top', labels: { color: '#cbd5e1' } },
+                tooltip: { 
+                    callbacks: {
+                        label: function(ctx) {
+                            return `${ctx.dataset.label}: ${ctx.raw.x[0]}M - ${ctx.raw.x[1]}M`;
+                        }
+                    }
+                }
+            }
+        }
+    });
+
+    // --- CHART 2: DETAILED MATCHES (Per Cousin) ---
+    const ctxDetail = document.getElementById('detailChart').getContext('2d');
+
+    // For the detail chart, we still group by family for color consistency,
+    // BUT the tooltip will reveal the specific name.
+    // Also, we turn OFF stacking so overlapping segments are visible (via opacity).
+    
+    // Create new datasets with opacity for better overlap visibility
+    const detailDatasets = groups.map(gKey => {
+        return {
+            label: groupLabels[gKey],
+            data: detailedSegments.filter(d => d.group === gKey),
+            backgroundColor: COLORS[gKey] + '80', // Add 50% opacity (hex 80)
+            borderColor: COLORS[gKey],
+            borderWidth: 1,
+            barPercentage: 0.8,      // Maximize individual bar thickness
+            categoryPercentage: 0.8  // Maximize category width usage
+        };
+    });
+
+    new Chart(ctxDetail, {
+        type: 'bar',
+        data: {
+            labels: yLabels,
+            datasets: detailDatasets
+        },
+        options: {
+            indexAxis: 'y',
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: {
+                mode: 'nearest', // Show tooltip for nearest item
+                axis: 'y',
+                intersect: false // Allow seeing multiple items if close
+            },
+            scales: {
+                x: {
+                    min: 0, max: 250,
+                    title: { display: true, text: 'Posição (Mb)', color: '#94a3b8' },
+                    grid: { color: '#334155' },
+                    ticks: { color: '#94a3b8' }
+                },
+                y: {
+                    stacked: true, // STACKED -> Bars use full category height (overlapping segments blend)
+                    grid: { color: '#334155' },
+                    ticks: { color: '#cbd5e1' }
+                }
+            },
+            plugins: {
+                legend: { position: 'top', labels: { color: '#cbd5e1' } },
+                tooltip: {
+                    backgroundColor: 'rgba(15, 23, 42, 0.95)',
+                    titleColor: '#f8fafc',
+                    bodyColor: '#cbd5e1',
+                    callbacks: {
+                        // THIS IS THE KEY PART: Show the cousin name!
+                        label: function(ctx) {
+                            const raw = ctx.raw;
+                            return `👤 ${raw.name}: ${raw.x[0]}M - ${raw.x[1]}M`;
+                        }
+                    }
+                }
+            }
+        }
+    });
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatório Completo de Mapeamento Genético - Valter Agostini</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --blue: #2c3e50;
+            --light-blue: #3498db;  /* Paterno Avô */
+            --green: #27ae60;       /* Paterno Avó */
+            --yellow: #f39c12;      /* Materno Avô */
+            --purple: #8e44ad;      /* Materno Avó */
+            --bg: #f4f7f6;
+            --text: #333;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            background: white;
+            padding: 40px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+
+        header {
+            text-align: center;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+
+        h1 { color: var(--blue); margin-bottom: 5px; }
+        .subtitle { color: #7f8c8d; font-size: 1.1em; }
+
+        .section-title {
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin-top: 40px;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .bg-blue { background-color: var(--light-blue); }
+        .bg-green { background-color: var(--green); }
+        .bg-yellow { background-color: var(--yellow); }
+        .bg-purple { background-color: var(--purple); }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            font-size: 0.95em;
+        }
+
+        th {
+            text-align: left;
+            padding: 12px;
+            background-color: #ecf0f1;
+            color: var(--blue);
+            border-bottom: 2px solid #bdc3c7;
+        }
+
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+            vertical-align: top;
+        }
+
+        tr:hover { background-color: #f9f9f9; }
+
+        .segment-tag {
+            display: inline-block;
+            background: #eef2f3;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9em;
+            margin-bottom: 2px;
+            border: 1px solid #ddd;
+        }
+
+        .note-box {
+            background-color: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .print-btn {
+            display: block;
+            width: 200px;
+            margin: 20px auto 0;
+            padding: 10px;
+            background: var(--blue);
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        @media print {
+            .print-btn { display: none; }
+            body { background: white; }
+            .container { box-shadow: none; margin: 0; padding: 0; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Relatório Genético Completo</h1>
+        <div class="subtitle">Valter Alessandro Agostini - Mapeamento de Segmentos de DNA</div>
+        <p>Este documento consolida a análise de triangulação genética finalizada em Fevereiro de 2026.</p>
+    </header>
+
+    <div class="note-box">
+        <strong><i class="fas fa-info-circle"></i> Resumo das Descobertas:</strong>
+        <ul style="margin: 5px 0 0 20px;">
+            <li><strong>Lado Agostini (Paterno):</strong> 100% Confirmado (Vêneto/Trento).</li>
+            <li><strong>Lado Pasquini (Paterno):</strong> Confirmada ancestralidade mista (Italiana, Luso-Brasileira e Alemã).</li>
+            <li><strong>Lado Rizzato (Materno):</strong> Cromossomo 4 inteiramente mapeado com conexões internacionais (Dinamarca/Rússia).</li>
+            <li><strong>Lado Gallois (Materno):</strong> Reclassificação do Cluster 19 (João G. Rocha) e confirmação da linha Francesa.</li>
+        </ul>
+    </div>
+
+    <div class="section-title bg-blue">
+        <i class="fas fa-male"></i> 1. Lado Paterno - Avô (Agostini / Riello)
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 40%">Primo (Match)</th>
+                <th>Segmentos de DNA Compartilhados</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Matteo Baggio</strong></td>
+                <td><span class="segment-tag">Chr 3: 40.1 - 67.2M</span></td>
+            </tr>
+            <tr>
+                <td><strong>Camila Lanzillo</strong></td>
+                <td>
+                    <span class="segment-tag">Chr 3: 59.6 - 72.0M</span><br>
+                    <span class="segment-tag">Chr 8: 109.0 - 137.5M</span><br>
+                    <span class="segment-tag">Chr 18: 42.9 - 47.4M</span>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Ana Baldasso</strong></td>
+                <td><span class="segment-tag">Chr 8 (Cluster Agostini)</span></td>
+            </tr>
+            <tr>
+                <td><strong>Susi Mondo</strong></td>
+                <td>
+                    <span class="segment-tag">Chr 3: 56.3 - 61.1M</span><br>
+                    <span class="segment-tag">Chr 6, 12, 16</span>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Miriam Valezi</strong></td>
+                <td>
+                    <span class="segment-tag">Chr 8: 110.5 - 126.4M</span><br>
+                    <span class="segment-tag">Chr 19</span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="section-title bg-green">
+        <i class="fas fa-female"></i> 2. Lado Paterno - Avó (Pasquini / Nascimento / Della Torre)
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 40%">Primo (Match)</th>
+                <th>Segmentos de DNA Compartilhados</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Yan Della Torre</strong></td>
+                <td>
+                    <span class="segment-tag">Chr 13: 91.2 - 112.8M</span><br>
+                    <span class="segment-tag">Chr 20: 17.7 - 31.2M</span>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Matteo Bianco</strong></td>
+                <td>
+                    <span class="segment-tag">Chr 13: 98.4 - 103.9M</span><br>
+                    <span class="segment-tag">Chr 2, 11</span>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Walter Kraft</strong></td>
+                <td>
+                    <span class="segment-tag">Chr 13: 97.9 - 105.5M</span><br>
+                    <span class="segment-tag">Chr 15: 61.5 - 67.0M</span>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Guiomar Damin Pinheiro</strong></td>
+                <td>
+                    <span class="segment-tag">Chr 9: 87.6 - 110.6M</span><br>
+                    <span class="segment-tag">Chr 13, 15, 19</span>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Eduardo Ruben Nascimento</strong></td>
+                <td>
+                    <span class="segment-tag">Chr 15: 54.6 - 66.3M</span><br>
+                    <span class="segment-tag">Chr 19: 9.9 - 14.5M</span>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Maura Nascimento</strong></td>
+                <td><span class="segment-tag">Chr 17: 33.8 - 53.8M</span></td>
+            </tr>
+            <tr>
+                <td><strong>Ro Schneider</strong></td>
+                <td><span class="segment-tag">Chr 17: 30.4 - 48.3M</span></td>
+            </tr>
+            <tr>
+                <td><strong>Viviane Sbrana</strong></td>
+                <td><span class="segment-tag">Chr 14: 53.0 - 71.0M</span></td>
+            </tr>
+            <tr>
+                <td><strong>Frederico Pinheiro Teixeira</strong></td>
+                <td><span class="segment-tag">Chr 2: 181.6 - 210.5M</span></td>
+            </tr>
+            <tr>
+                <td><strong>Angela Becker (Grupo Alemão)</strong></td>
+                <td><span class="segment-tag">Chr 5: 114.4 - 122.1M</span></td>
+            </tr>
+            <tr>
+                <td><strong>Luka Kunz</strong></td>
+                <td>
+                    <span class="segment-tag">Chr 5: 67.5 - 73.4M</span><br>
+                    <span class="segment-tag">Chr 19: 8.6 - 14.5M</span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="section-title bg-yellow">
+        <i class="fas fa-male"></i> 3. Lado Materno - Avô (Rizzato / Albuquerque)
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 40%">Primo (Match)</th>
+                <th>Segmentos de DNA Compartilhados</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Marcos Toledo Artigas</strong></td>
+                <td><span class="segment-tag">Chr 4: 16.7 - 27.9M</span></td>
+            </tr>
+            <tr>
+                <td><strong>Luiz Fernando R. Barros</strong></td>
+                <td><span class="segment-tag">Chr 4: 18.9 - 27.6M</span></td>
+            </tr>
+            <tr>
+                <td><strong>Beatriz Rissato</strong></td>
+                <td><span class="segment-tag">Chr 4: 41.6 - 75.9M</span></td>
+            </tr>
+            <tr>
+                <td><strong>Morten M. Andersen (DK)</strong></td>
+                <td><span class="segment-tag">Chr 4: 41.8 - 62.1M</span></td>
+            </tr>
+            <tr>
+                <td><strong>Naya Skammelsen (DK)</strong></td>
+                <td><span class="segment-tag">Chr 4: 41.8 - 61.3M</span></td>
+            </tr>
+            <tr>
+                <td><strong>Elena Lurye (RU)</strong></td>
+                <td><span class="segment-tag">Chr 4: 41.6 - 61.3M</span></td>
+            </tr>
+            <tr>
+                <td><strong>Erich Silz</strong></td>
+                <td><span class="segment-tag">Chr 4: 48.1 - 57.7M</span></td>
+            </tr>
+            <tr>
+                <td><strong>Moisés Cassimiro Dias</strong></td>
+                <td>
+                    <span class="segment-tag">Chr 11: 32.0 - 37.0M</span><br>
+                    <span class="segment-tag">Chr 16: 50.0 - 59.8M</span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="section-title bg-purple">
+        <i class="fas fa-female"></i> 4. Lado Materno - Avó (Gallois / Barbosa)
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 40%">Primo (Match)</th>
+                <th>Segmentos de DNA Compartilhados</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Mélanie Petit-juillard</strong></td>
+                <td>
+                    <span class="segment-tag">Chr 19: 45.0 - 54.5M</span><br>
+                    <span class="segment-tag">Chr 9: 135.0 - 137.0M</span><br>
+                    <span class="segment-tag">Chr 1: 0.9 - 4.7M</span>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Nicole Le Blanc</strong></td>
+                <td><span class="segment-tag">Chr 19: 45.0 - 54.8M</span></td>
+            </tr>
+            <tr>
+                <td><strong>Celso Monteiro Iglesias</strong></td>
+                <td>
+                    <span class="segment-tag">Chr 1: 3.3 - 10.8M</span><br>
+                    <span class="segment-tag">Chr 19: 43.9 - 47.4M</span>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Nando Lenior</strong></td>
+                <td>
+                    <span class="segment-tag">Chr 1: 4.1 - 8.2M</span><br>
+                    <span class="segment-tag">Chr 2: 84.5 - 100.1M</span>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>João Guilherme Rocha</strong></td>
+                <td><span class="segment-tag">Chr 2: 81.7 - 119.7M</span></td>
+            </tr>
+            <tr>
+                <td><strong>Ronaldo Lima</strong></td>
+                <td>
+                    <span class="segment-tag">Chr 2: 18.2 - 31.4M</span><br>
+                    <span class="segment-tag">Chr 17: 3.8 - 7.0M</span>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Natália Godoy</strong></td>
+                <td><span class="segment-tag">Chr 9: 9.3 - 13.5M</span></td>
+            </tr>
+            <tr>
+                <td><strong>Marcelo Greco</strong></td>
+                <td><span class="segment-tag">Chr 9: 138.2 - 140.9M</span></td>
+            </tr>
+            <tr>
+                <td><strong>Jean Claude Jacquet</strong></td>
+                <td><span class="segment-tag">Chr 14: 26.3 - 52.0M</span></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div onclick="window.print()" class="print-btn">
+        <i class="fas fa-print"></i> Imprimir Relatório
+    </div>
+</div>
+
+</body>
+</html>
